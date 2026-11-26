@@ -1,0 +1,30 @@
+:root {
+  /* Colors: derived from the reference, accent shifted to cool blue */
+  --bg: #fcfeff;
+  --surface: #ffffff;
+  --tint: #f5f8fa;
+  --tint-blue: #e8f4ff;
+  --text: #2a2f33;
+  --muted: #9da0ab;
+  --faint: #c7c9d1;
+  --line: #e8eaed;
+  --green: #61c27e;
+  --accent: #2f7fd1;
+
+  /* Type */
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+
+  /* Layout */
+  --container: 1200px;
+  --gutter: 24px;
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgba(42, 47, 51, 0.04), 0 8px 24px rgba(42, 47, 51, 0.05);
+  --ease: cubic-bezier(0.44, 0, 0.56, 1);
+}

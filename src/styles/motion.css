@@ -1,0 +1,66 @@
+/* ---------- Motion system ---------- */
+:root { --ease-out: cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* Header: slides away when scrolling down, returns on scroll up */
+.header { transition: translate 0.6s var(--ease-out), top 0.5s var(--ease-out); }
+.header--hidden { translate: 0 -220%; }
+.header--solid { top: 16px; }
+
+/* Scroll progress line */
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 300; transform-origin: 0 50%; background: linear-gradient(90deg, #2f7fd1, #7cc4ff 60%, #61c27e); pointer-events: none; }
+
+/* Auto reveal (class is added by useMotion and removed after the transition) */
+.mo { opacity: 0; transform: translate3d(0, 44px, 0) scale(0.985); will-change: opacity, transform;
+  transition: opacity 1s var(--ease-out) var(--mo-d, 0ms), transform 1.1s var(--ease-out) var(--mo-d, 0ms) ; }
+.mo.mo-in { opacity: 1; transform: none; }
+.mo[data-mo='head'] { transform: translate3d(0, 56px, 0); transition-duration: 1.1s, 1.3s; }
+.mo[data-mo='img'] { opacity: 1; transform: none; clip-path: inset(0 0 100% 0 round 12px); transition: clip-path 1.3s var(--ease-out) var(--mo-d, 0ms); }
+.mo[data-mo='img'].mo-in { clip-path: inset(0 0 0 0 round 12px); }
+.mo[data-mo='img'] img { transform: scale(1.3); transition: transform 1.8s var(--ease-out) var(--mo-d, 0ms); }
+.mo[data-mo='img'].mo-in img { transform: scale(1); }
+
+/* Hero image: slow cinematic settle on load (parallax then takes over, same end scale) */
+@keyframes heroSettle { from { transform: scale(1.34); } to { transform: scale(1.18); } }
+.hero__img { will-change: transform; animation: heroSettle 2.6s var(--ease-out) backwards; }
+
+/* Buttons: letter-roll hover (each character rolls up, a twin rises from below) + gentle colour shift */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn::before { display: none; }
+.btn:hover, .btn:active { transform: none; }
+.btn__label { display: inline-flex; overflow: hidden; height: 1.3em; line-height: 1.3em; white-space: pre; }
+.btn__ch {
+  display: block; line-height: 1.3em; text-shadow: 0 1.3em 0 currentColor;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); transition-delay: calc(var(--i) * 14ms);
+}
+.btn:hover .btn__ch, .btn:focus-visible .btn__ch { transform: translateY(-1.3em); }
+.btn { transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease; }
+
+/* Cards: smoother lift + icon motion */
+.service-card, .feature, .offer, .review, .blog-card, .stat, .info-card, .block, .member { transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), background-color 0.4s; }
+.feature__ico { transition: transform 0.6s var(--ease-out), background-color 0.3s; }
+.feature:hover .feature__ico { transform: rotate(-8deg) scale(1.1); }
+.stat:hover, .info-card:hover, .block:hover, .member:hover, .review:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+
+/* Links in menus / footer: animated underline */
+.footer__col a, .footer__social a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.5s var(--ease-out), color 0.3s; }
+.footer__col a:hover, .footer__social a:hover { background-size: 100% 1px; }
+
+/* Page-hero card + image settle */
+.page-hero__img img { will-change: transform; }
+
+/* Reduced-motion systems still get gentle fades, without movement, blur or parallax */
+@media (prefers-reduced-motion: reduce) {
+  .mo, .mo[data-mo] { transform: none !important; filter: none !important; clip-path: none !important; }
+  .mo[data-mo='img'] { opacity: 0; transition: opacity 0.9s var(--ease-out) var(--mo-d, 0ms); }
+  .mo[data-mo='img'].mo-in { opacity: 1; }
+  .mo[data-mo='img'] img { transform: none; }
+  .hero__img { animation: none; }
+}
+
+/* Heading text motion: words > characters rise from the baseline, staggered (split by useMotion) */
+.mo-split .sw { display: inline-block; white-space: nowrap; }
+.mo-split .sc {
+  display: inline-block; transform-origin: 50% 100%; transform: scaleY(0); opacity: 0; will-change: transform, opacity;
+  transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) calc(var(--i) * 20ms), opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) calc(var(--i) * 20ms);
+}
+.mo-split.mo-in .sc { transform: none; opacity: 1; }
