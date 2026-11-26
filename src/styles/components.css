@@ -124,8 +124,8 @@
 .service-card__rail { display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 10px 0; color: var(--muted); }
 .service-card__rail svg { width: 18px; height: 18px; color: var(--text); }
 .service-card__rail span { font-family: var(--font-mono); font-size: 10.5px; }
-.service-card__img { border-radius: var(--r-md); overflow: hidden; min-height: 190px; background: var(--tint-blue); }
-.service-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
+.service-card__img { position: relative; border-radius: var(--r-md); overflow: hidden; aspect-ratio: 4 / 5; background: var(--tint-blue); }
+.service-card__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.7s var(--ease); }
 .service-card:hover .service-card__img img { transform: scale(1.05); }
 .service-card__body { background: #fff; border-radius: var(--r-md); padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: inset 0 0 0 1px var(--line); position: relative; }
 .service-card__body h3 { font-size: 24px; line-height: 27px; }
@@ -255,7 +255,7 @@
 @media (max-width: 599px) {
   .panel { padding: 90px 16px 16px; }
   .service-card { grid-template-columns: 32px 1fr; }
-  .service-card__img { grid-column: 2; min-height: 180px; }
+  .service-card__img { grid-column: 2; aspect-ratio: 4 / 3; }
   .service-card__body { grid-column: 2; }
   .service-card__rail { grid-row: 1 / span 2; }
   .offers-grid, .why__list, .areas__list, .qform, .qform--hero { grid-template-columns: 1fr; }
