@@ -7,7 +7,6 @@ import FinancingSection from '../components/sections/FinancingSection.jsx';
 import OffersSection from '../components/sections/OffersSection.jsx';
 import AreasSection from '../components/sections/AreasSection.jsx';
 import FAQSection from '../components/sections/FAQSection.jsx';
-import CTASection from '../components/sections/CTASection.jsx';
 
 export default function Home() {
   useSEO({ title: '', description: 'Expert AC repair, installation, maintenance and 24/7 emergency HVAC service. Upfront pricing, licensed technicians, same-day service.' });
@@ -22,7 +21,6 @@ export default function Home() {
       <OffersSection />
       <AreasSection />
       <FAQSection />
-      <CTASection />
     </>
   );
 }
